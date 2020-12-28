@@ -1,7 +1,6 @@
+import nltk
 from nltk import WordNetLemmatizer
 from nltk.corpus import stopwords
-import spacy
-from tqdm import tqdm
 
 
 class Postprocessing:
@@ -13,11 +12,10 @@ class Postprocessing:
         embed_all(list): returns vectors for all data
     """
 
-    def __init__(self, MAX_NUMBER_OF_VECTORS=30):
+    def __init__(self):
         self.stop_words = set(stopwords.words('english'))
         self.lemmatizer = WordNetLemmatizer()
-        self.nlp = spacy.load("en_core_web_lg", disable=['tokenizer', 'parser', 'ner', 'tagger'])
-        self.MAX_NUMBER_OF_VECTORS = MAX_NUMBER_OF_VECTORS
+        nltk.download('wordnet')
 
     def remove_stopwords(self, tokens):
         return [word for word in tokens if word not in self.stop_words]
@@ -25,10 +23,13 @@ class Postprocessing:
     def lemmatize(self, tokens):
         return [self.lemmatizer.lemmatize(token) for token in tokens]
 
-    def embed(self, tokens):
-        return [self.nlp(token).vector for token in tokens][:self.MAX_NUMBER_OF_VECTORS]
+    def postprocessing_pipeline(self, raw, group=False):
+        """
+        Parameters:
+            raw: list of input strings or single string
+            group: if True, works with list of input data, else expects single string input
+        """
+        if group:
+            return [self.lemmatize(self.remove_stopwords(tweet)) for tweet in raw]
 
-    def embed_all(self, data):
-        return [self.embed(data[i]) for i in tqdm(range(len(data)))]
-
-
+        return self.lemmatize(self.remove_stopwords(raw))

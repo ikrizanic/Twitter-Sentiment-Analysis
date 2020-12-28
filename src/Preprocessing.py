@@ -33,14 +33,18 @@ class Preprocessing:
         tokenized = self.tokenizer.tokenize(raw)
         return tokenized
 
-    def preprocessing_pipe(self, raw, group=False):
+    @staticmethod
+    def to_lower(raw):
+        return raw.lower()
+
+    def preprocessing_pipeline(self, raw, group=False):
         """
         Parameters:
             raw: list of input strings or single string
             group: if True, works with list of input data, else expects single string input
         """
         if group:
-            return [self.tokenize(self.remove_punctuation(self.remove_usernames(self.remove_links(tweet)))) for tweet in
-                    raw]
+            return [self.tokenize(self.to_lower(self.remove_punctuation(self.remove_usernames(
+                self.remove_links(tweet))))) for tweet in raw]
 
-        return self.tokenize(self.remove_usernames(self.remove_links(self.remove_punctuation(raw))))
+        return self.tokenize(self.to_lower(self.remove_usernames(self.remove_links(self.remove_punctuation(raw)))))
