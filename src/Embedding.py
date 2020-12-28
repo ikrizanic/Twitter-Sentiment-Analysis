@@ -33,7 +33,7 @@ class Embedding:
     @staticmethod
     def encode_data(data, vocab):
         for i in tqdm(range(len(data['text']))):
-            data['text'][i] = [vocab.get(token) if token in vocab else 0 for token in data['text'][i]]
+            data['text'][i] = [vocab.get(token, 0) for token in data['text'][i]]
         return data
 
     def make_embedding_matrix(self, vocab, embedding_dim=300):
