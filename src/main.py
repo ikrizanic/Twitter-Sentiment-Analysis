@@ -33,9 +33,14 @@ def main():
         embedding_matrix = pickle.load(f)
 
     print("Embedding...")
-    encoded_data = emb.encode_data(df, vocab)['text']
-    with open("../data/encoded_data.pl", "wb") as f:
-        pickle.dump(encoded_data, f)
+    # encoded_data = emb.encode_data(df, vocab)['text']
+    with open("../data/encoded_data.pl", "rb") as f:
+        # pickle.dump(encoded_data, f)
+        encoded_data = pickle.load(f)
+
+    print("Padding...")
+    data = emb.pad_encoded_data(encoded_data, size=min(15, max(len(e) for e in encoded_data)))
+    print("Done!")
 
 
 if __name__ == '__main__':

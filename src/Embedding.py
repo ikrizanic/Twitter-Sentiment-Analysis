@@ -50,13 +50,14 @@ class Embedding:
         print("Converted %d words (%d misses)" % (hits, misses))
         return embedding_matrix
 
-    def pad_encoded_data(self, encoded):
-        seq_length = self.MAX_NUMBER_OF_VECTORS
-        features = np.zeros((len(encoded), seq_length), dtype=float)
+    def pad_encoded_data(self, encoded, size=None):
+        if size is None:
+            size = self.MAX_NUMBER_OF_VECTORS
+        features = np.zeros((len(encoded), size), dtype=float)
         for i, review in enumerate(encoded):
-            if len(review) > seq_length:
-                review = review[:seq_length]
-            zeroes = list(np.zeros(seq_length - len(review)))
+            if len(review) > size:
+                review = review[:size]
+            zeroes = list(np.zeros(size - len(review)))
             new = zeroes + review
             features[i, :] = np.array(new)
         return features
