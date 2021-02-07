@@ -30,8 +30,9 @@ class Embedding:
 
         return my_vocab
 
-    @staticmethod
-    def encode_data(data, vocab):
+    def encode_data(self, data, vocab, single=False):
+        if single:
+            return self.pad_encoded_data([[vocab.get(token, 0) for token in data]])
         for i in tqdm(range(len(data['text']))):
             data['text'][i] = [vocab.get(token, 0) for token in data['text'][i]]
         return data
