@@ -53,6 +53,7 @@ class Embedding:
     def pad_encoded_data(self, encoded, size=None):
         if size is None:
             size = self.MAX_NUMBER_OF_VECTORS
+        print("Size of encoded data: ", size)
         features = np.zeros((len(encoded), size), dtype=float)
         for i, review in enumerate(encoded):
             if len(review) > size:
