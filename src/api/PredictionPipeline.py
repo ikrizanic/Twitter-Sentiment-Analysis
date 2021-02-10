@@ -1,6 +1,6 @@
-from src.Embedding import Embedding
-from src.Postprocessing import Postprocessing
-from src.Preprocessing import Preprocessing
+from api.Embedding import Embedding
+from api.Postprocessing import Postprocessing
+from api.Preprocessing import Preprocessing
 
 
 class PredictionPipeline:
