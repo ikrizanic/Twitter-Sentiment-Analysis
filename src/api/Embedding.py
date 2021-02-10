@@ -1,4 +1,4 @@
-import spacy
+# import spacy
 from tqdm import tqdm
 import numpy as np
 from collections import Counter
@@ -6,7 +6,7 @@ from collections import Counter
 
 class Embedding:
     def __init__(self, MAX_NUMBER_OF_VECTORS=30):
-        self.nlp = spacy.load("en_core_web_lg", disable=['tokenizer', 'parser', 'ner', 'tagger'])
+        # self.nlp = spacy.load("en_core_web_lg", disable=['tokenizer', 'parser', 'ner', 'tagger'])
         self.MAX_NUMBER_OF_VECTORS = MAX_NUMBER_OF_VECTORS
         self.word_counter = Counter()
 
