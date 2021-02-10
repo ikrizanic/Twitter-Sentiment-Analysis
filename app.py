@@ -16,7 +16,7 @@ post = Postprocessing()
 emb = Embedding()
 with open("data/vocab.pl", "rb") as f:
     vocab = load(f)
-model = keras.models.load_model("../../saved_models/")
+model = keras.models.load_model("./saved_models/")
 pp = PredictionPipeline(vocab, model)
 print("Init done.")
 
