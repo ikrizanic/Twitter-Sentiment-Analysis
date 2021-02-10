@@ -84,7 +84,7 @@ def main():
     #     res = api.evaluate(X_test, y_test)
     #     return res
     #
-    # history, api = fit_model(api, x_train, y_train, x_val, y_val, batch_size=2048, epochs=2)
+    # history, model = fit_model(api, x_train, y_train, x_val, y_val, batch_size=2048, epochs=2)
     model = keras.models.load_model("../../saved_models/")
     pp = PredictionPipeline(vocab, model)
     print(pp.get_prediction("This is very nice Tweet and I'm happy!"))
