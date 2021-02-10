@@ -1,17 +1,13 @@
 import pickle
 
-from tensorflow.python.keras.callbacks import EarlyStopping, ModelCheckpoint
-from tensorflow.python.keras.layers import Masking
-
-from src.Utils import get_data_splits, one_hot_encoder, normalize_labels
-from src.Embedding import Embedding
-from src.Utils import load_dataset
-from src.Preprocessing import Preprocessing
-from src.Postprocessing import Postprocessing
+from api.Utils import one_hot_encoder
+from api.Embedding import Embedding
+from api.Utils import load_dataset
+from api.Preprocessing import Preprocessing
+from api.Postprocessing import Postprocessing
 import pandas as pd
 from PredictionPipeline import PredictionPipeline
 from tensorflow import keras
-from keras import layers
 
 
 def main():
@@ -21,10 +17,10 @@ def main():
     post = Postprocessing()
     emb = Embedding()
 
-    print("Loading data...")
-    df = load_dataset("../dataset/dataset.csv")
+    # print("Loading data...")
+    # df = load_dataset("../dataset/dataset.csv")
 
-    labels = one_hot_encoder(df['label'])
+    # labels = one_hot_encoder(df['label'])
 
     # print("Preprocessing...")
     # df['text'] = prep.preprocessing_pipeline(df['text'], group=True)
@@ -33,7 +29,7 @@ def main():
     # df['text'] = post.postprocessing_pipeline(df['text'], group=True)
     #
     # # vocab = emb.build_vocab(df['text'], size=50000)
-    with open("../data/vocab.pl", "rb") as f:
+    with open("../../data/vocab.pl", "rb") as f:
         # pickle.dump(vocab, f)
         vocab = pickle.load(f)
     #
@@ -56,48 +52,47 @@ def main():
     #
     # x_val, x_test, y_val, y_test = get_data_splits(x_test, y_test, test_size=0.5)
     #
-    # model = keras.Sequential()
+    # api = keras.Sequential()
     # # Add an Embedding layer expecting input vocab of size 1000, and
     # # output embedding dimension of size 64.
-    # model.add(layers.Embedding(input_dim=len(vocab) + 1, output_dim=300, weights=[embedding_matrix],
+    # api.add(layers.Embedding(input_dim=len(vocab) + 1, output_dim=300, weights=[embedding_matrix],
     #                            trainable=False, mask_zero=True))
     #
     # # Masking layer
-    # model.add(Masking(mask_value=0.0))
+    # api.add(Masking(mask_value=0.0))
     #
     # # Add a LSTM layer with 128 internal units.
-    # model.add(layers.LSTM(128, activation='relu'))
+    # api.add(layers.LSTM(128, activation='relu'))
     #
     # # Add a Dense layer with 2 units.
-    # model.add(layers.Dense(2, activation='softmax'))
+    # api.add(layers.Dense(2, activation='softmax'))
     #
-    # model.summary()
-    # model.compile(optimizer='adam', loss=keras.losses.SquaredHinge(reduction="auto", name="squared_hinge"),
+    # api.summary()
+    # api.compile(optimizer='adam', loss=keras.losses.SquaredHinge(reduction="auto", name="squared_hinge"),
     #               metrics=[keras.metrics.Recall()])
     # callbacks = [EarlyStopping(monitor='val_loss', patience=3),
-    #              ModelCheckpoint("/home/ikrizanic/Documents/git_repos/Twitter-Sentiment-Analysis/model.h5")]
+    #              ModelCheckpoint("/home/ikrizanic/Documents/git_repos/Twitter-Sentiment-Analysis/api.h5")]
     #
-    # def fit_model(model, X_train, y_train, X_val, y_val, batch_size=128, epochs=200):
-    #     history = model.fit(X_train, y_train,
+    # def fit_model(api, X_train, y_train, X_val, y_val, batch_size=128, epochs=200):
+    #     history = api.fit(X_train, y_train,
     #                         batch_size=batch_size, epochs=epochs,
     #                         callbacks=callbacks,
     #                         validation_data=(X_val, y_val))
-    #     return history, model
+    #     return history, api
     #
-    # def evaluate_model(model, X_test, y_test):
-    #     res = model.evaluate(X_test, y_test)
+    # def evaluate_model(api, X_test, y_test):
+    #     res = api.evaluate(X_test, y_test)
     #     return res
     #
-    # history, model = fit_model(model, x_train, y_train, x_val, y_val, batch_size=2048, epochs=2)
+    # history, api = fit_model(api, x_train, y_train, x_val, y_val, batch_size=2048, epochs=2)
     model = keras.models.load_model("/home/ikrizanic/Documents/git_repos/Twitter-Sentiment-Analysis/model.h5")
     pp = PredictionPipeline(vocab, model)
     print(pp.get_prediction("This is very nice Tweet and I'm happy!"))
     print(pp.get_prediction("I hate myself"))
     print(pp.get_prediction("GO TO HELL"))
     print(pp.get_prediction("Life is good!!!"))
+    print(pp.get_prediction("I'm gonna find you and im gonna kill you :)"))
     print("Done!")
-
-
 
 
 if __name__ == '__main__':
