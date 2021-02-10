@@ -9,3 +9,4 @@ numpy~=1.19.2
 wheel~=0.35
 gunicorn
 nltk
+sklearn
