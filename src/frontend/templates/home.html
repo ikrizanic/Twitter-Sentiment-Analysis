@@ -1,0 +1,18 @@
+<div>
+    <h1>Twitter Sentiment Analysis - Flask app</h1>
+    <h2>Welcome to the basic app!</h2>
+    <h2>Enter text to see sentiment score:</h2>
+    <form action="/" method="post">
+        <label for="text">Text:</label>
+        <input type="text" id="text" name="text"><br><br>
+        <input type="submit" id="submit_btn" value="Submit"><br><br>
+    </form>
+    <div>
+        {% if result != "" %}
+        <h2>Given text: {{ text }}</h2>
+        <h2>Result: {{result}}</h2>
+        {% endif %}
+    </div>
+</div>
+
+
