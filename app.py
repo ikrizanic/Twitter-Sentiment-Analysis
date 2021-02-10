@@ -1,22 +1,22 @@
 from flask import Flask, render_template, request
 from flask_cors import CORS
 from pickle import load
-from api.Preprocessing import Preprocessing
-from api.Postprocessing import Postprocessing
-from api.Embedding import Embedding
-from api.PredictionPipeline import PredictionPipeline
+from src.api.Preprocessing import Preprocessing
+from src.api.Postprocessing import Postprocessing
+from src.api.Embedding import Embedding
+from src.api.PredictionPipeline import PredictionPipeline
 from tensorflow import keras
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder='src/frontend/templates')
 
 
 ## init
 prep = Preprocessing()
 post = Postprocessing()
 emb = Embedding()
-with open("../../data/vocab.pl", "rb") as f:
+with open("data/vocab.pl", "rb") as f:
     vocab = load(f)
-model = keras.models.load_model("../../model2.h5")
+model = keras.models.load_model("model2.h5")
 pp = PredictionPipeline(vocab, model)
 print("Init done.")
 
