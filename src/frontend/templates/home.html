@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
   <head>
-      <link rel="stylesheet" href="frontend/static/css/base.css">
+      <link rel="stylesheet" href="src/frontend/static/css/base.css">
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -15,10 +15,8 @@
   <body>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
   <div class="container" >
-        <h1 class="text-center">Twitter Sentiment Analysis - Flask app</h1>
-        <h2 class="text-center">Welcome to the basic app!</h2>
-        <h2 class="text-center">Enter text to see sentiment score:</h2><br><br>
-
+        <h1 class="text-center">Welcome to the basic sentiment analysis app!</h1><br><br>
+        <h2 class="text-center">Enter text to get the sentiment score:</h2><br><br>
         <form action="/" method="post">
             <div class="form-row">
                 <div class="row">
@@ -54,9 +52,8 @@
             </script>
             {% endif %}
         </div>
-
-    </div>
-
+        <br><br><div class="text-center">Heroku is slow sometimes, so please be patient :)</div><br><br>
+  </div>
   </body>
 </html>
 
