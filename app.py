@@ -10,7 +10,6 @@ from tensorflow import keras
 app = Flask(__name__, template_folder='src/frontend/templates')
 
 
-## init
 prep = Preprocessing()
 post = Postprocessing()
 emb = Embedding()
@@ -19,6 +18,7 @@ with open("data/vocab.pl", "rb") as f:
 model = keras.models.load_model("./saved_models/")
 pp = PredictionPipeline(vocab, model)
 print("Init done.")
+
 
 @app.route('/', methods=['POST', 'GET'])
 def get_text():
