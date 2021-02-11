@@ -32,27 +32,44 @@
 
         <div>
             {% if result != "" %}
-            <h2>Given text: {{ text }}</h2>
-            <h2 id="result-h2"></h2>
+            <h3>Given text: {{ text }}</h3>
+            <h3 id="result-h2"></h3><br>
             <div class="progress">
                 <div id="progressbar" class="progress-bar-tick bg-success" role="progressbar" style="width: 50%" aria-valuemin="0" aria-valuemax="100"></div>
             </div><br><br>
             <script>
-                let progress = "{{result}}" * 100;
+                let progress = ("{{result}}" * 100).toFixed();
                 let color = "progress-bar-tick bg-warning";
-
+                let status = "neutral";
                 if (progress < 35) {
+                    status = "negative";
                     color = "progress-bar-tick bg-danger";
+                    progress = Math.abs(100 - progress)
                 } else if (progress > 65) {
                     color = "progress-bar-tick bg-success";
+                    status = "positive"
                 }
                 document.getElementById('progressbar').className = color;
                 document.getElementById('progressbar').style.width = progress + "%";
-                document.getElementById('result-h2').innerHTML = "Result: " + progress.toFixed() + "% positive";
+                if (status === "neutral") {
+                    document.getElementById('result-h2').innerHTML = "Result: I'm not sure, this text seams to be neutral.";
+                } else {
+                    document.getElementById('result-h2').innerHTML = "Result: " + progress + "% " + status;
+                }
             </script>
             {% endif %}
         </div>
         <br><br><div class="text-center">Heroku is slow sometimes, so please be patient :)</div><br><br>
+
+      <br><br><br><div class="row justify-content-center">
+         <div class="row w-auto">
+              <div class="github-card" data-github="ikrizanic" data-width="400" data-height="" data-theme="default"></div>
+              <script src="//cdn.jsdelivr.net/github-cards/latest/widget.js"></script>
+         </div>
+      </div>
+
+
+
   </div>
   </body>
 </html>
