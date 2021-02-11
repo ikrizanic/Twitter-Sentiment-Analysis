@@ -1,8 +1,9 @@
-from flask import Flask, render_template, request, redirect, url_for
-from flask_cors import CORS
 from pickle import load
-from src.api.PredictionPipeline import PredictionPipeline
+
+from flask import Flask, render_template, request
 from tensorflow import keras
+
+from src.api.PredictionPipeline import PredictionPipeline
 
 app = Flask(__name__, template_folder='src/frontend/templates')
 
@@ -18,17 +19,10 @@ class Pipeline:
         return 1 - self.pp.get_prediction(text)[0][0]
 
 
-pipeline = None
+pipeline = Pipeline()
 
 
-@app.route('/')
-def init():
-    global pipeline
-    pipeline = Pipeline()
-    return redirect(url_for('get_text'))
-
-
-@app.route('/home', methods=['POST', 'GET'])
+@app.route('/', methods=['POST', 'GET'])
 def get_text():
     if request.method == 'POST':
         text = request.form['text']
