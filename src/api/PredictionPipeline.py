@@ -4,6 +4,9 @@ from src.api.Preprocessing import Preprocessing
 
 
 class PredictionPipeline:
+    """
+
+    """
 
     def __init__(self, vocab, model):
         self.preprocessing = Preprocessing()

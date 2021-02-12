@@ -47,4 +47,4 @@ class Preprocessing:
             return [self.tokenize(self.to_lower(self.remove_punctuation(self.remove_usernames(
                 self.remove_links(tweet))))) for tweet in raw]
 
-        return self.tokenize(self.to_lower(self.remove_usernames(self.remove_links(self.remove_punctuation(raw)))))
+        return self.tokenize(self.to_lower(self.remove_punctuation(self.remove_usernames(self.remove_links(raw)))))
