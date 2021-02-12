@@ -1,0 +1,12 @@
+Flask
+Flask-Cors
+Flask-RESTful
+Jinja2
+Keras
+tensorflow-cpu
+h5py~=2.10.0
+numpy~=1.19.2
+wheel~=0.35
+gunicorn
+nltk
+sklearn

@@ -11,11 +11,11 @@ from tensorflow import keras
 
 
 def main():
-    pd.options.mode.chained_assignment = None
-
-    prep = Preprocessing()
-    post = Postprocessing()
-    emb = Embedding()
+    # pd.options.mode.chained_assignment = None
+    #
+    # prep = Preprocessing()
+    # post = Postprocessing()
+    # emb = Embedding()
 
     # print("Loading data...")
     # df = load_dataset("../dataset/dataset.csv")
@@ -84,8 +84,8 @@ def main():
     #     res = api.evaluate(X_test, y_test)
     #     return res
     #
-    # history, api = fit_model(api, x_train, y_train, x_val, y_val, batch_size=2048, epochs=2)
-    model = keras.models.load_model("/home/ikrizanic/Documents/git_repos/Twitter-Sentiment-Analysis/model.h5")
+    # history, model = fit_model(api, x_train, y_train, x_val, y_val, batch_size=2048, epochs=2)
+    model = keras.models.load_model("../../saved_models/")
     pp = PredictionPipeline(vocab, model)
     print(pp.get_prediction("This is very nice Tweet and I'm happy!"))
     print(pp.get_prediction("I hate myself"))

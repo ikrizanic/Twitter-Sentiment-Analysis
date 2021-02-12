@@ -1,9 +1,12 @@
-from api.Embedding import Embedding
-from api.Postprocessing import Postprocessing
-from api.Preprocessing import Preprocessing
+from src.api.Embedding import Embedding
+from src.api.Postprocessing import Postprocessing
+from src.api.Preprocessing import Preprocessing
 
 
 class PredictionPipeline:
+    """
+
+    """
 
     def __init__(self, vocab, model):
         self.preprocessing = Preprocessing()

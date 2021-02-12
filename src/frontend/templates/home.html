@@ -1,18 +1,76 @@
-<div>
-    <h1>Twitter Sentiment Analysis - Flask app</h1>
-    <h2>Welcome to the basic app!</h2>
-    <h2>Enter text to see sentiment score:</h2>
-    <form action="/" method="post">
-        <label for="text">Text:</label>
-        <input type="text" id="text" name="text"><br><br>
-        <input type="submit" id="submit_btn" value="Submit"><br><br>
-    </form>
-    <div>
-        {% if result != "" %}
-        <h2>Given text: {{ text }}</h2>
-        <h2>Result: {{result}}</h2>
-        {% endif %}
-    </div>
-</div>
+<!doctype html>
+<html lang="en">
+  <head>
+      <link rel="stylesheet" href="src/frontend/static/css/base.css">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+
+    <title>Twitter Sentiment Analysis</title>
+
+  </head>
+  <body>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+  <div class="container" >
+        <h1 class="text-center">Welcome to the basic sentiment analysis app!</h1><br><br>
+        <h2 class="text-center">Enter text to get the sentiment score:</h2><br><br>
+        <form action="/" method="post">
+            <div class="form-row">
+                <div class="row">
+                    <input class="col-10 w-100 input-group-lg" type="text" id="text" name="text"><br><br>
+                </div><br>
+                <div class="row justify-content-center">
+                    <input class="w-25 btn btn-primary" type="submit" id="submit_btn" value="Submit"><br><br>
+                </div>
+            </div>
+        </form>
+        <br><br>
+
+
+        <div>
+            {% if result != "" %}
+            <h3>Given text: {{ text }}</h3>
+            <h3 id="result-h2"></h3><br>
+            <div class="progress">
+                <div id="progressbar" class="progress-bar-tick bg-success" role="progressbar" style="width: 50%" aria-valuemin="0" aria-valuemax="100"></div>
+            </div><br><br>
+            <script>
+                let progress = ("{{result}}" * 100).toFixed();
+                let color = "progress-bar-tick bg-warning";
+                let status = "neutral";
+                if (progress < 35) {
+                    status = "negative";
+                    color = "progress-bar-tick bg-danger";
+                    progress = Math.abs(100 - progress)
+                } else if (progress > 65) {
+                    color = "progress-bar-tick bg-success";
+                    status = "positive"
+                }
+                document.getElementById('progressbar').className = color;
+                document.getElementById('progressbar').style.width = progress + "%";
+                if (status === "neutral") {
+                    document.getElementById('result-h2').innerHTML = "Result: I'm not sure, this text seams to be neutral.";
+                } else {
+                    document.getElementById('result-h2').innerHTML = "Result: " + progress + "% " + status;
+                }
+            </script>
+            {% endif %}
+        </div>
+        <br><br><div class="text-center">Heroku is slow sometimes, so please be patient :)</div><br><br>
+
+      <br><br><br><div class="row justify-content-center">
+         <div class="row w-auto">
+              <div class="github-card" data-github="ikrizanic" data-width="400" data-height="" data-theme="default"></div>
+              <script src="//cdn.jsdelivr.net/github-cards/latest/widget.js"></script>
+         </div>
+      </div>
+
+
+
+  </div>
+  </body>
+</html>
 
