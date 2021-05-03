@@ -10,7 +10,7 @@ The idea of project is to compare results of different models, but for now only 
 # Web app
 
 #### A working version of basic flask app is online and available with [this link](https://twitter-sentiment-analysis-app.herokuapp.com/).
-App is currently deployed on _Heroku_, so it can be slow to load at the moments
+App is currently deployed on _Heroku_, so it can be slow to load at times
 ## Future work
 - implement more models for comparison of predicted sentiments
 - implement React.js frontend for better looks
